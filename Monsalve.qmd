@@ -1,6 +1,6 @@
 ---
 title: "CLASE PROGRAMACIÓN"
-author: "DAMARIS"
+author: "Liany Damaris Monsalve Soto"
 format:
   html:
     toc: true
