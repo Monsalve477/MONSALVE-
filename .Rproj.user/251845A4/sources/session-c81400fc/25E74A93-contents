@@ -1,0 +1,19 @@
+
+
+X <-"hola"
+y <- "UNTRM"
+
+paste(X,Y)
+
+
+Saludo <- function(z,f){
+  
+  
+  paste(z,f)
+  
+    
+}
+
+
+saludo(z="hola",f= "FICA")
+
