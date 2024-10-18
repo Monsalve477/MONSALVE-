@@ -10,18 +10,33 @@ format:
     smooth-scroll: true
     anchor-sections: true
     output-file: index
-
-
-
 ---
 
-## Quarto
+## INTRODUCCION
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-## Running Code
+Los lenguajes de programación dan instrucciones al computador con alto nivel de 
+control. Existe una amplia gama de lenguajes, para muchos objetivos, unos más 
+complejos o
+más flexibles, muchos de los cuales permiten la creación de gráficos y 
+visualizaciones. Las posibilidades van desde herramientas para capturar y
+transformar datos hasta opciones para presentar y difundir información usando
+gráficos estáticos o interactivos <https://quarto.org>.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## MODELOS LINEALES
+
+En estadística, el término modelo lineal es usado en diferentes maneras de acuerdo al contexto. La manera más frecuente es en conexión con modelos de regresión y el término a menudo se toma como un sinónimo del modelo de regresión lineal. Sin embargo, el término es también usado en análisis de series de tiempo con un significado diferente. En cada caso, la denominación como "lineal" es usada para identificar una subclase de modelos para los cuales la reducción en complejidad de la teoría estadística relacionada es posible.
+
+Ventajas
+
+Desventajas
+
+
+como saber cual es un factor y una variable
+
+el factor tiene niveles
+la variable la cantidad
+
 
 ```{r}
 1 + 1
@@ -29,8 +44,9 @@ When you click the **Render** button a document will be generated that includes 
 
 You can add options to executable code like this
 
+
+
 ```{r}
-#| echo: false
 2 * 2
 ```
 
@@ -41,7 +57,43 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 -   Negrita: *esto es fuente negrita*
 -   Cursiva: Solanum tuberosum
+# Modelo lineal
 
 
+# Modelo lineal
+
+# IMPORTAR DATOS 
+
+```{r}
+library(googlesheets4)
+library(tidyverse)
+
+url <- "https://docs.google.com/spreadsheets/d/15r7ZwcZZHbEgltlF6gSFvCTFA-CFzVBWwg3mFlRyKPs/edit?gid=172957346#gid=172957346"
+gs <- as_sheets_id(url)    
+
+fb <- gs %>%
+   range_read("fb")
+```
 
 
+# Modelo lineal
+
+
+```{r}
+modelo <- lm(formula = lfa ~ bloque + geno + riego + riego*geno
+            ,data = fb)
+str(fb)
+```
+##box plot
+
+
+```{r}
+ggplot(fb,aes(x= factor(geno),y=lfa,fill= factor(riego)))+geom_boxplot()+
+  labs(x= "genotipo", y = "LFA",fill= "riego")+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 45 ,hjust = 1))+
+  ggtitle("Boxplot de LFA por genotipo y Riego")
+```
+
+
+```{r}
