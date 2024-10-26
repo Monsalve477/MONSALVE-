@@ -14,6 +14,20 @@ format:
 
 ## INTRODUCCION
 
+<<<<<<< HEAD
+Los lenguajes de programación dan instrucciones al computador con alto nivel de control. Existe una amplia gama de lenguajes, para muchos objetivos, unos más complejos o más flexibles, muchos de los cuales permiten la creación de gráficos y visualizaciones. Las posibilidades van desde herramientas para capturar y transformar datos hasta opciones para presentar y difundir información usando gráficos estáticos o interactivos <https://quarto.org>.
+
+# MODELOS LINEALES
+
+En estadística, el término modelo lineal es usado en diferentes maneras de acuerdo al contexto. La manera más frecuente es en conexión con modelos de regresión y el término a menudo se toma como un sinónimo del modelo de regresión lineal. Sin embargo, el término es también usado en análisis de series de tiempo con un significado diferente. En cada caso, la denominación como "lineal" es usada para identificar una subclase de modelos para los cuales la reducción en complejidad de la teoría estadística relacionada es posible.
+
+#Ventajas
+
+#Desventajas
+
+como saber cual es un factor y una variable
+
+el factor tiene niveles la variable la cantidad
 
 Los lenguajes de programación dan instrucciones al computador con alto nivel de 
 control. Existe una amplia gama de lenguajes, para muchos objetivos, unos más 
@@ -27,9 +41,9 @@ gráficos estáticos o interactivos <https://quarto.org>.
 
 En estadística, el término modelo lineal es usado en diferentes maneras de acuerdo al contexto. La manera más frecuente es en conexión con modelos de regresión y el término a menudo se toma como un sinónimo del modelo de regresión lineal. Sin embargo, el término es también usado en análisis de series de tiempo con un significado diferente. En cada caso, la denominación como "lineal" es usada para identificar una subclase de modelos para los cuales la reducción en complejidad de la teoría estadística relacionada es posible.
 
-Ventajas
+##Ventajas
 
-Desventajas
+##Desventajas
 
 
 como saber cual es un factor y una variable
@@ -39,61 +53,105 @@ la variable la cantidad
 
 
 ```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-
-
-```{r}
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
-# ¿Cómo usar Quarto?
-
-## fuentes
-
--   Negrita: *esto es fuente negrita*
--   Cursiva: Solanum tuberosum
-# Modelo lineal
-
-
-# Modelo lineal
-
-# IMPORTAR DATOS 
-
-```{r}
-library(googlesheets4)
+library(agricolae)
+trt<-c(3,2) 
+# factorial 3x2
+outdesign <-design.ab(trt, r=5, serie=2)
+book<-outdesign$book
+head(book,10) 
+# print of the field book
 library(tidyverse)
 
+book<-outdesign$book %>% 
+  mutate(dosis = case_when(
+    A == 1 ~ 0
+    , A == 2 ~ 50
+    , A == 3 ~ 100
+  )) %>% 
+  mutate(variedad = case_when(
+    B == 1 ~ "peruanita"
+    , B == 2 ~ "canchan"
+  ))
+```
+
+#book
+#IMPORTAR DATOS
+
+```{r}
+
+source('https://inkaverse.com/setup.r')
+
+##Analisis de datos
+
 url <- "https://docs.google.com/spreadsheets/d/15r7ZwcZZHbEgltlF6gSFvCTFA-CFzVBWwg3mFlRyKPs/edit?gid=172957346#gid=172957346"
-gs <- as_sheets_id(url)    
 
-fb <- gs %>%
-   range_read("fb")
-```
+gs <- as_sheets_id(url)
 
+fb <- gs %>% 
+  range_read("fb")
 
-# Modelo lineal
-
-
-```{r}
 modelo <- lm(formula = lfa ~ bloque + geno + riego + riego*geno
-            ,data = fb)
+             , data = fb)
+# modelo de ANOVA
+
+anova(modelo)
+
 str(fb)
+
+ggplot(fb, aes(x = factor(geno), y = lfa, fill = factor(riego))) +
+  geom_boxplot() +
+  labs(x = "Genotipo", y = "LFA", fill = "Riego") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  ggtitle("Boxplot de LFA por Genotipo y Riego")
+
+library(agricolae)
+
+# Test de Tukey para el factor 'riego'
+tukey_riego <- HSD.test(modelo, "riego", group = TRUE)
+print(tukey_riego)
+
+# Test de Tukey para el factor 'geno'
+tukey_geno <- HSD.test(modelo, "geno", group = TRUE)
+print(tukey_geno)
+
+#Test de Tukey para la interacción 'riego:geno'
+tukey_interaccion <- HSD.test(modelo, c("riego", "geno"), group = TRUE)
+print(tukey_interaccion)
+
+str(tukey_interaccion)
+
+mc <- tukey_interaccion$groups %>% 
+  rownames_to_column("trat") %>% 
+  separate(trat, c("riego", "variedad"))
+
+str(mc)
+
+names(mc)
+
+
+ggplot(mc, aes(x = variedad, y = lfa, fill = riego)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_text(aes(label = groups), position = position_dodge(0.9), vjust = -0.5) +
+  labs(x = "Variedad", y = "LFA", fill = "Riego") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+mc <- emmeans(modelo, ~ riego * geno)
+mc <- emmeans(modelo, ~ riego | geno)
+
+mc <- emmeans(modelo, ~ geno | riego) %>% 
+  as.data.frame()
+
+mc
+install.packages("ggplot2")
+
+ggplot(mc, aes(x = geno, y = emmean, fill = riego)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  # geom_text(aes(label = emmean), position = position_dodge(0.9), vjust = -0.5) +
+  labs(x = "Variedad", y = "LFA", fill = "Riego") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 ```
-##box plot
 
-
-```{r}
-ggplot(fb,aes(x= factor(geno),y=lfa,fill= factor(riego)))+geom_boxplot()+
-  labs(x= "genotipo", y = "LFA",fill= "riego")+
-  theme_minimal()+
-  theme(axis.text.x = element_text(angle = 45 ,hjust = 1))+
-  ggtitle("Boxplot de LFA por genotipo y Riego")
-```
-
-
-```{r}
