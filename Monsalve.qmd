@@ -20,9 +20,9 @@ Los lenguajes de programación dan instrucciones al computador con alto nivel de
 
 En estadística, el término modelo lineal es usado en diferentes maneras de acuerdo al contexto. La manera más frecuente es en conexión con modelos de regresión y el término a menudo se toma como un sinónimo del modelo de regresión lineal. Sin embargo, el término es también usado en análisis de series de tiempo con un significado diferente. En cada caso, la denominación como "lineal" es usada para identificar una subclase de modelos para los cuales la reducción en complejidad de la teoría estadística relacionada es posible.
 
-Ventajas
+#Ventajas
 
-Desventajas
+#Desventajas
 
 como saber cual es un factor y una variable
 
@@ -50,7 +50,8 @@ book<-outdesign$book %>%
   ))
 ```
 
-book
+#book
+#2 IMPORTAR DATOS
 
 ```{r}
 #importar data
@@ -67,6 +68,7 @@ fb <- gs %>%
 
 modelo <- lm(formula = lfa ~ bloque + geno + riego + riego*geno
              , data = fb)
+# modelo de ANOVA
 
 anova(modelo)
 

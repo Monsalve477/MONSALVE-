@@ -3118,8 +3118,8 @@ vertical-align: -.125em;
 <section id="modelos-lineales" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="modelos-lineales"><span class="header-section-number">2</span> MODELOS LINEALES</h2>
 <p>En estadística, el término modelo lineal es usado en diferentes maneras de acuerdo al contexto. La manera más frecuente es en conexión con modelos de regresión y el término a menudo se toma como un sinónimo del modelo de regresión lineal. Sin embargo, el término es también usado en análisis de series de tiempo con un significado diferente. En cada caso, la denominación como “lineal” es usada para identificar una subclase de modelos para los cuales la reducción en complejidad de la teoría estadística relacionada es posible.</p>
-<p>Ventajas</p>
-<p>Desventajas</p>
+<p>#Ventajas</p>
+<p>#Desventajas</p>
 <p>como saber cual es un factor y una variable</p>
 <p>el factor tiene niveles la variable la cantidad</p>
 <div class="cell">
@@ -3132,15 +3132,15 @@ vertical-align: -.125em;
 <div class="cell-output cell-output-stdout">
 <pre><code>   plots block A B
 1    101     1 1 2
-2    102     1 2 2
-3    103     1 3 2
+2    102     1 2 1
+3    103     1 2 2
 4    104     1 3 1
-5    105     1 1 1
-6    106     1 2 1
-7    107     2 2 1
-8    108     2 1 1
-9    109     2 1 2
-10   110     2 3 1</code></pre>
+5    105     1 3 2
+6    106     1 1 1
+7    107     2 1 1
+8    108     2 2 1
+9    109     2 3 1
+10   110     2 3 2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print of the field book</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3167,7 +3167,7 @@ vertical-align: -.125em;
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    , B <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;canchan&quot;</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>book</p>
+<p>#book #2 IMPORTAR DATOS</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importar data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;https://inkaverse.com/setup.r&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3195,8 +3195,9 @@ vertical-align: -.125em;
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> lfa <span class="sc">~</span> bloque <span class="sc">+</span> geno <span class="sc">+</span> riego <span class="sc">+</span> riego<span class="sc">*</span>geno</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>             , <span class="at">data =</span> fb)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># modelo de ANOVA</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
