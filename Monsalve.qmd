@@ -14,14 +14,7 @@ format:
 
 ## INTRODUCCION
 
-
-Los lenguajes de programación dan instrucciones al computador con alto nivel de 
-control. Existe una amplia gama de lenguajes, para muchos objetivos, unos más 
-complejos o
-más flexibles, muchos de los cuales permiten la creación de gráficos y 
-visualizaciones. Las posibilidades van desde herramientas para capturar y
-transformar datos hasta opciones para presentar y difundir información usando
-gráficos estáticos o interactivos <https://quarto.org>.
+Los lenguajes de programación dan instrucciones al computador con alto nivel de control. Existe una amplia gama de lenguajes, para muchos objetivos, unos más complejos o más flexibles, muchos de los cuales permiten la creación de gráficos y visualizaciones. Las posibilidades van desde herramientas para capturar y transformar datos hasta opciones para presentar y difundir información usando gráficos estáticos o interactivos <https://quarto.org>.
 
 ## MODELOS LINEALES
 
@@ -31,13 +24,11 @@ Ventajas
 
 Desventajas
 
-
 como saber cual es un factor y una variable
 
-el factor tiene niveles
-la variable la cantidad
+el factor tiene niveles la variable la cantidad
 
-
+```{r}
 library(agricolae)
 trt<-c(3,2) 
 # factorial 3x2
@@ -57,8 +48,10 @@ book<-outdesign$book %>%
     B == 1 ~ "peruanita"
     , B == 2 ~ "canchan"
   ))
+```
 
 book
+
 ```{r}
 #importar data
 source('https://inkaverse.com/setup.r')
@@ -134,6 +127,3 @@ ggplot(mc, aes(x = geno, y = emmean, fill = riego)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
-
-
-
